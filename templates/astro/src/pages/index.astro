@@ -1,0 +1,40 @@
+---
+import App from '../App';
+
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+const serviceWorker = `${basePath}/sw.js`;
+---
+
+<html lang="__DEFAULT_LOCALE__">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href={`${basePath}/favicon.svg`} />
+    <link rel="manifest" href={`${basePath}/manifest.webmanifest`} />
+    <link rel="apple-touch-icon" href={`${basePath}/apple-touch-icon.png`} />
+    <meta name="theme-color" content="#f6f6f8" />
+    <title>__APP_TITLE__</title>
+    <style is:inline>
+      html {
+        background: #f6f6f8;
+      }
+      html[data-theme='dark'] {
+        background: #17181c;
+      }
+    </style>
+    <script is:inline>
+      var saved = localStorage.getItem('color-mode');
+      var dark = saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    </script>
+    <script is:inline define:vars={{ serviceWorker, production: import.meta.env.PROD }}>
+      if (production && 'serviceWorker' in navigator) {
+        navigator.serviceWorker.register(serviceWorker);
+      }
+    </script>
+  </head>
+  <body>
+    <App client:only="react" />
+  </body>
+</html>

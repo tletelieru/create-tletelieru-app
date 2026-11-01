@@ -1,0 +1,25 @@
+{
+  "name": "create-tletelieru-app",
+  "version": "0.1.0",
+  "description": "Scaffold a React + Vite + TypeScript PWA for GitHub Pages",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "create-tletelieru-app": "bin/create.mjs"
+  },
+  "files": [
+    "bin",
+    "lib/scaffold.mjs",
+    "templates"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test \"lib/*.test.mjs\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tletelieru/create-tletelieru-app.git"
+  }
+}
